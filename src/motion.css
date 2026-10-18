@@ -1,0 +1,9 @@
+/* Paint-only motion: no changes to the site's type, spacing or section sizes. */
+.motion-line { display: inline-block; max-width: 100%; }
+.contact-period { display: inline-block; }
+.contact-email > span:first-child { transition: color .35s ease; }
+.contact-email:hover > span:first-child, .contact-email:focus-visible > span:first-child { color: #45503b; }
+@media (hover: none), (pointer: coarse) { .contact-email:hover > span:first-child { color: inherit; } }
+@media (prefers-reduced-motion: reduce) {
+  .contact-email > span:first-child { transition: none; }
+}

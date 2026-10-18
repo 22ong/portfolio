@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1000" viewBox="0 0 1200 1000">
+  <rect width="1200" height="1000" fill="#eff0e9"/>
+  <rect x="95" y="140" width="1010" height="720" fill="#f7f7f2" stroke="#cbd1c1"/>
+  <path d="M95 196H1105" stroke="#cbd1c1"/>
+  <g fill="#cbd1c1"><circle cx="120" cy="168" r="4"/><circle cx="137" cy="168" r="4"/><circle cx="154" cy="168" r="4"/></g>
+  <ellipse cx="839" cy="490" rx="270" ry="130" transform="rotate(-28 839 490)" fill="none" stroke="#cbd1c1"/>
+  <circle cx="1066" cy="370" r="8" fill="#dbe7bb"/>
+  <g font-family="Arial,sans-serif" fill="#242723">
+    <text x="150" y="283" font-size="11" letter-spacing="2" fill="#7b826f">WEB REDESIGN</text>
+    <text x="145" y="455" font-size="132" font-weight="500" letter-spacing="-9">FAMILY</text>
+    <text x="145" y="597" font-size="132" font-weight="500" letter-spacing="-9">CENTER.</text>
+    <path d="M150 650H1050" stroke="#dbded4"/>
+    <text x="150" y="730" font-size="12" letter-spacing="1.8" fill="#7b826f">THUMBNAIL PLACEHOLDER</text>
+    <text x="150" y="757" font-size="11" fill="#8a8d83">A new perspective on a familiar experience.</text>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+/* All three principles remain visible in the existing vertical list. */
+.about-statement { container-type: inline-size; }
+.about-statement h2 { max-width: none; font-size: min(clamp(33px, 3.05vw, 49px), 9.1cqi); }
+.about-statement h2 .motion-line { white-space: nowrap; }
+.about.is-reading-focused .about-principle { opacity: .35; transition: opacity .65s cubic-bezier(.2,.65,.3,1); }
+.about.is-reading-focused .about-principle.is-keyword-active { opacity: 1; }
+@media (max-width: 1000px) {
+  .about-statement h2 { font-size: min(clamp(34px, 5.5vw, 50px), 9.1cqi); }
+}
+@media (max-width: 760px) {
+  .about-statement h2 { font-size: min(clamp(30px, 7.4vw, 42px), 9.1cqi); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about.is-reading-focused .about-principle { opacity: 1; transition: none; }
+}

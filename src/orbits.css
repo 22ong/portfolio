@@ -1,0 +1,26 @@
+/* One line/point language, quiet at the start and expanded at the end. */
+.hero-target { isolation: isolate; }
+.hero-orbit { position: relative; z-index: -1; pointer-events: none; }
+.hero-orbit-measure { visibility: hidden; }
+.hero { position: relative; overflow: clip; }
+.hero-orbit { align-self: center; margin-top: 0; }
+.hero-orbit .orbit-svg { position: absolute; width: 76vw; height: auto; max-width: none; right: -12vw; top: 50%; transform: translateY(-50%); }
+.hero-target:hover .hero-orbit { transform: none; }
+.hero .title-mark path { stroke: #c7d6a7; stroke-width: 14; opacity: .65; }
+.orbit-svg { display: block; pointer-events: none; user-select: none; -webkit-user-select: none; }
+.orbit-line { fill: none; stroke: #c3ccb6; stroke-width: .9; vector-effect: non-scaling-stroke; }
+.orbit-point { fill: #c7d6a7; }
+.orbit-svg-hero .orbit-line { stroke: #cbd1c1; stroke-width: .8; }
+.orbit-svg-hero .orbit-point { r: 2px; }
+.contact { position: relative; isolation: isolate; }
+.contact-orbits { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; user-select: none; -webkit-user-select: none; }
+.contact-orbits .orbit-svg { width: 100%; height: 100%; }
+.contact-orbits .orbit-line { stroke-width: 1; }
+.orbit-line-secondary { opacity: .45; }
+.contact-title-link, .contact-email { user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
+@media (max-width: 1000px) { .hero-orbit .orbit-svg { width: 80vw; right: -16vw; } }
+@media (max-width: 760px) {
+  .hero-orbit .orbit-svg { width: 100vw; right: -28vw; }
+  .contact-orbits .orbit-line { stroke-width: .75; opacity: .7; }
+  .contact-orbits .orbit-line-secondary { opacity: .3; }
+}

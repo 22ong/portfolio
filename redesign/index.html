@@ -27,43 +27,42 @@
       <a class="nav-link nav-secondary" href="/#about">About</a>
       <a class="nav-link nav-secondary" href="/#contact">Contact</a>
     </nav>
-  </header>`}function o(e,t){let n=matchMedia(`(min-width: 761px) and (hover: hover) and (pointer: fine)`),r=matchMedia(`(prefers-reduced-motion: reduce)`),i=null,a=0,o=0,s=!1,c=0,l=0,u=0,d=0;function f(){let e=r.matches?1:.18;c+=(u-c)*e,l+=(d-l)*e,t.style.transform=`translate3d(${c}px, ${l}px, 0) translate(-50%, -50%)`,i&&(a=requestAnimationFrame(f))}function p(e){if(e===i)return;i?.classList.remove(`has-work-cursor`);let n=!!i;i=e,i?(n||(c=u,l=d,f()),i.classList.add(`has-work-cursor`),t.classList.add(`is-visible`)):(t.classList.remove(`is-visible`),cancelAnimationFrame(a))}function m(){o=0;let t=n.matches&&s?document.elementFromPoint(u,d)?.closest(`[data-work-cursor]`):null;p(e.includes(t)?t:null)}function h(){o||=requestAnimationFrame(m)}function g(){s=!1,cancelAnimationFrame(o),o=0,p(null)}document.addEventListener(`pointermove`,e=>{!n.matches||e.pointerType===`touch`?g():(s=!0,u=e.clientX,d=e.clientY,m())}),document.addEventListener(`pointerout`,e=>{e.relatedTarget||g()}),document.addEventListener(`pointercancel`,g),e.forEach(e=>{e.addEventListener(`click`,g),e.addEventListener(`dragstart`,e=>e.preventDefault())}),addEventListener(`scroll`,h,{passive:!0}),addEventListener(`resize`,h),addEventListener(`blur`,g),addEventListener(`pagehide`,g),document.addEventListener(`visibilitychange`,()=>{document.hidden&&g()}),n.addEventListener(`change`,g)}var s=Object.assign({"./assets/family-center/cover.png":`../assets/cover-D86-8Wx0.png`,"./assets/family-center/portfolio.png":`../assets/portfolio-ClKbzSYJ.png`}),c=e=>Object.entries(s).find(([t])=>t.split(`/`).pop().startsWith(`${e}.`))?.[1],l={cover:c(`cover`),portfolio:c(`portfolio`)},u=!!(l.cover&&l.portfolio),d=e=>String(e).replace(/[&<>"']/g,e=>({"&":`&amp;`,"<":`&lt;`,">":`&gt;`,'"':`&quot;`,"'":`&#39;`})[e]);function f(e,t,n=l){return`<main class="work-page family-center-detail" id="page-content" aria-labelledby="family-center-heading">
-    <h1 class="sr-only" id="family-center-heading">${d(e.title)}.</h1>
+  </header>`}function o(e,t){let n=matchMedia(`(min-width: 761px) and (hover: hover) and (pointer: fine)`),r=matchMedia(`(prefers-reduced-motion: reduce)`),i=null,a=0,o=0,s=!1,c=0,l=0,u=0,d=0;function f(){let e=r.matches?1:.18;c+=(u-c)*e,l+=(d-l)*e,t.style.transform=`translate3d(${c}px, ${l}px, 0) translate(-50%, -50%)`,i&&(a=requestAnimationFrame(f))}function p(e){if(e===i)return;i?.classList.remove(`has-work-cursor`);let n=!!i;i=e,i?(n||(c=u,l=d,f()),i.classList.add(`has-work-cursor`),t.classList.add(`is-visible`)):(t.classList.remove(`is-visible`),cancelAnimationFrame(a))}function m(){o=0;let t=n.matches&&s?document.elementFromPoint(u,d)?.closest(`[data-work-cursor]`):null;p(e.includes(t)?t:null)}function h(){o||=requestAnimationFrame(m)}function g(){s=!1,cancelAnimationFrame(o),o=0,p(null)}document.addEventListener(`pointermove`,e=>{!n.matches||e.pointerType===`touch`?g():(s=!0,u=e.clientX,d=e.clientY,m())}),document.addEventListener(`pointerout`,e=>{e.relatedTarget||g()}),document.addEventListener(`pointercancel`,g),e.forEach(e=>{e.addEventListener(`click`,g),e.addEventListener(`dragstart`,e=>e.preventDefault())}),addEventListener(`scroll`,h,{passive:!0}),addEventListener(`resize`,h),addEventListener(`blur`,g),addEventListener(`pagehide`,g),document.addEventListener(`visibilitychange`,()=>{document.hidden&&g()}),n.addEventListener(`change`,g)}var s=Object.assign({"./assets/family-center/portfolio.png":`../assets/portfolio-ClKbzSYJ.png`}),c={portfolio:(e=>Object.entries(s).find(([t])=>t.split(`/`).pop().startsWith(`${e}.`))?.[1])(`portfolio`)},l=!!c.portfolio,u=e=>String(e).replace(/[&<>"']/g,e=>({"&":`&amp;`,"<":`&lt;`,">":`&gt;`,'"':`&quot;`,"'":`&#39;`})[e]);function d(e,t,n=c){return`<main class="work-page family-center-detail" id="page-content" aria-labelledby="family-center-heading">
+    <h1 class="sr-only" id="family-center-heading">${u(e.title)}.</h1>
     <div class="family-center-images">
-      <img class="family-center-image family-center-cover" src="${d(n.cover)}" alt="청주시 가족센터 웹 리디자인 포트폴리오 표지" width="1920" height="950" fetchpriority="high" decoding="async" />
-      <img class="family-center-image family-center-portfolio" src="${d(n.portfolio)}" alt="가족센터 전체 포트폴리오: Overview, Mood board, Design System, As-is, To-be" width="1920" height="9154" loading="lazy" decoding="async" />
+      <img class="family-center-image family-center-portfolio" src="${u(n.portfolio)}" alt="가족센터 전체 포트폴리오: Overview, Mood board, Design System, As-is, To-be" width="1920" height="9154" fetchpriority="high" decoding="async" />
     </div>
     <nav class="family-center-navigation" aria-label="프로젝트 탐색">
       <a class="work-back-link" href="/#work"><span aria-hidden="true">←</span> BACK TO WORK</a>
-      ${t?`<a class="work-back-link family-center-next" href="${d(t.link)}"><span>NEXT PROJECT</span><span>${d(t.title)} <span aria-hidden="true">↗</span></span></a>`:``}
+      ${t?`<a class="work-back-link family-center-next" href="${u(t.link)}"><span>NEXT PROJECT</span><span>${u(t.title)} <span aria-hidden="true">↗</span></span></a>`:``}
     </nav>
-  </main>`}var p=e=>String(e).replace(/[&<>"']/g,e=>({"&":`&amp;`,"<":`&lt;`,">":`&gt;`,'"':`&quot;`,"'":`&#39;`})[e]),m=(globalThis.__PORTFOLIO_PREVIEW_PATH__??location.pathname).split(`/`).filter(Boolean)[1],h=i.projects.find(e=>e.id===m),g=`<footer class="work-page-footer"><span>© 2026 ${p(e.name)}</span><span>THINK CLEAR. MAKE IT MATTER.</span><a href="/#work">BACK TO WORK <span aria-hidden="true">↗</span></a></footer>`;function _(e){return`<article class="work-entry" aria-labelledby="${e.id}-heading">
-    <a class="work-thumbnail" href="${p(e.link)}" aria-label="${p(e.title)} 프로젝트 자세히 보기" draggable="false" data-work-cursor>
-      <img${e.thumbnailFit===`contain`?` class="is-cover-thumbnail"`:``} src="${p(e.thumbnail)}" alt="${p(e.alt)}" width="1200" height="1000" draggable="false" loading="${e.number===`01`?`eager`:`lazy`}" />
+  </main>`}var f=e=>String(e).replace(/[&<>"']/g,e=>({"&":`&amp;`,"<":`&lt;`,">":`&gt;`,'"':`&quot;`,"'":`&#39;`})[e]),p=(globalThis.__PORTFOLIO_PREVIEW_PATH__??location.pathname).split(`/`).filter(Boolean)[1],m=i.projects.find(e=>e.id===p),h=`<footer class="work-page-footer"><span>© 2026 ${f(e.name)}</span><span>THINK CLEAR. MAKE IT MATTER.</span><a href="/#work">BACK TO WORK <span aria-hidden="true">↗</span></a></footer>`;function g(e){return`<article class="work-entry" aria-labelledby="${e.id}-heading">
+    <a class="work-thumbnail" href="${f(e.link)}" aria-label="${f(e.title)} 프로젝트 자세히 보기" draggable="false" data-work-cursor>
+      <img${e.thumbnailFit===`contain`?` class="is-cover-thumbnail"`:``} src="${f(e.thumbnail)}" alt="${f(e.alt)}" width="1200" height="1000" draggable="false" loading="${e.number===`01`?`eager`:`lazy`}" />
       <span class="work-thumbnail-hint" aria-hidden="true">VIEW PROJECT <span>↗</span></span>
     </a>
-    <div class="work-entry-meta"><span class="work-entry-number">${p(e.number)}</span>
-      <div class="work-entry-title"><h2 id="${e.id}-heading"><a href="${p(e.link)}">${p(e.title)}<span aria-hidden="true">↗</span></a></h2><p>${p(e.description)}</p></div>
-      <p class="work-entry-facts"><span>${p(e.year)}</span><span>${p(e.category)}</span></p>
+    <div class="work-entry-meta"><span class="work-entry-number">${f(e.number)}</span>
+      <div class="work-entry-title"><h2 id="${e.id}-heading"><a href="${f(e.link)}">${f(e.title)}<span aria-hidden="true">↗</span></a></h2><p>${f(e.description)}</p></div>
+      <p class="work-entry-facts"><span>${f(e.year)}</span><span>${f(e.category)}</span></p>
     </div>
-  </article>`}function v(){return`<main class="work-page" id="page-content">
+  </article>`}function _(){return`<main class="work-page" id="page-content">
     <section class="work-page-intro" aria-labelledby="redesign-heading">
       <div class="work-page-eyebrow"><p class="eyebrow"><span class="section-number">${i.number}</span> SELECTED WORK</p><span>${String(i.projects.length).padStart(2,`0`)} PROJECTS</span></div>
       <h1 id="redesign-heading">${i.title}<span class="work-page-point" aria-hidden="true">.</span></h1>
-      <div class="work-page-intro-bottom"><a class="work-back-link" href="/#work"><span aria-hidden="true">←</span> BACK TO WORK</a><p>${p(i.description)}</p></div>
+      <div class="work-page-intro-bottom"><a class="work-back-link" href="/#work"><span aria-hidden="true">←</span> BACK TO WORK</a><p>${f(i.description)}</p></div>
     </section>
-    <section class="work-project-list" aria-label="REDESIGN 프로젝트 목록">${i.projects.map(_).join(``)}</section>
-    ${g}
-  </main><div class="project-cursor work-list-cursor" aria-hidden="true"><span>VIEW<br>MORE</span><span class="cursor-arrow">↗</span></div>`}function y(e){return`<main class="work-page work-detail-placeholder" id="page-content">
+    <section class="work-project-list" aria-label="REDESIGN 프로젝트 목록">${i.projects.map(g).join(``)}</section>
+    ${h}
+  </main><div class="project-cursor work-list-cursor" aria-hidden="true"><span>VIEW<br>MORE</span><span class="cursor-arrow">↗</span></div>`}function v(e){return`<main class="work-page work-detail-placeholder" id="page-content">
     <a class="work-back-link" href="/redesign/"><span aria-hidden="true">←</span> ALL REDESIGN</a>
-    <div class="detail-placeholder-copy"><p class="eyebrow"><span class="section-number">${e.number}</span> REDESIGN / ${p(e.year)}</p>
-      <h1>${p(e.title)}<span class="work-page-point" aria-hidden="true">.</span></h1>
+    <div class="detail-placeholder-copy"><p class="eyebrow"><span class="section-number">${e.number}</span> REDESIGN / ${f(e.year)}</p>
+      <h1>${f(e.title)}<span class="work-page-point" aria-hidden="true">.</span></h1>
       <p class="detail-preparing">이 프로젝트의 이야기를 준비하고 있습니다.</p>
-      <p class="detail-description">${p(e.description)}</p>
+      <p class="detail-description">${f(e.description)}</p>
     </div>
-    <img class="detail-placeholder-image" src="${p(e.thumbnail)}" alt="${p(e.alt)}" width="1200" height="1000" />
+    <img class="detail-placeholder-image" src="${f(e.thumbnail)}" alt="${f(e.alt)}" width="1200" height="1000" />
     <div class="detail-return"><a class="work-back-link" href="/redesign/">← ALL REDESIGN</a><a class="work-back-link" href="/#work">BACK TO WORK ↗</a></div>
-    ${g}
-  </main>`}document.title=`${h?.title??i.title} — ${e.name}`,document.body.classList.toggle(`redesign-list-page`,!h);var b=h&&i.projects[i.projects.indexOf(h)+1],x=h?.id===`family-center`&&u?f(h,b):h?y(h):v();document.querySelector(`#app`).innerHTML=`<a class="skip-link" href="#page-content">본문으로 건너뛰기</a>${a()}${x}`,h||o([...document.querySelectorAll(`[data-work-cursor]`)],document.querySelector(`.work-list-cursor`));</script>
+    ${h}
+  </main>`}document.title=`${m?.title??i.title} — ${e.name}`,document.body.classList.toggle(`redesign-list-page`,!m);var y=m&&i.projects[i.projects.indexOf(m)+1],b=m?.id===`family-center`&&l?d(m,y):m?v(m):_();document.querySelector(`#app`).innerHTML=`<a class="skip-link" href="#page-content">본문으로 건너뛰기</a>${a()}${b}`,m||o([...document.querySelectorAll(`[data-work-cursor]`)],document.querySelector(`.work-list-cursor`));</script>
 <script>(()=>{const routes={"/":"index.html","/redesign/":"redesign/index.html","/redesign":"redesign/index.html","/redesign/family-center":"redesign/family-center/index.html","/redesign/family-center/":"redesign/family-center/index.html","/redesign/tangle/":"redesign/tangle/index.html","/redesign/tangle":"redesign/tangle/index.html","/redesign/monami/":"redesign/monami/index.html","/redesign/monami":"redesign/monami/index.html"};const prefix="../";for(const link of document.querySelectorAll('a[href]')){const path=link.getAttribute('href');if(path.startsWith('/#'))link.setAttribute('href',prefix+'index.html'+path.slice(1));else if(routes[path])link.setAttribute('href',prefix+routes[path]);}})();</script></body>
 </html>

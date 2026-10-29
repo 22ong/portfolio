@@ -1,5 +1,5 @@
 // Replace concept images and null links with real work when available.
-export const profile = { name: 'JIHYUN PARK', nameKo: '박지현', role: 'UI/UX & WEB DESIGNER' };
+export const profile = { name: 'SUYEON YUN', nameKo: '윤수연', role: 'UI/UX & WEB DESIGNER' };
 
 export const about = {
   statement: ['좋은 디자인은', '복잡한 정보를', '명확한 경험으로', '바꾸는 것이라고 생각합니다.'],
@@ -31,9 +31,9 @@ export const categories = [
     description: '익숙한 것을 새로운 시선으로 바라봅니다.\n브랜드의 본질을 발견하고, 더 나은 경험으로 연결합니다.',
     link: '/redesign/',
     projects: [
+      { id: 'family-center', title: '가족센터', subtitle: '청주시 가족센터 웹 리디자인', image: '/images/family-center-cover.png', imageFit: 'contain', alt: '청주시 가족센터 웹 리디자인 포트폴리오 표지', year: '—', category: 'Web Redesign', badge: 'WEB REDESIGN', link: '/redesign/family-center' },
       { id: 'tangle', title: 'TANGLE', subtitle: 'A new perspective on everyday wear', image: '/images/tangle.svg', alt: '오렌지 컬러와 대담한 타이포그래피의 TANGLE 패션 웹사이트 콘셉트', year: '2026', category: 'Web · Brand experience', link: null },
       { id: 'monami', title: 'MONAMI', subtitle: 'Every idea starts with a line', image: '/images/monami.svg', alt: '코발트 블루와 펜 그래픽을 사용한 MONAMI 문구 브랜드 웹사이트 콘셉트', year: '2026', category: 'Web · E-commerce', link: null },
-      { id: 'forma', title: 'FORMA', subtitle: 'Objects for a slower everyday', image: '/images/forma.svg', alt: '따뜻한 베이지와 의자 일러스트로 표현한 FORMA 가구 웹사이트 콘셉트', year: '2025', category: 'Web · Art direction', link: null },
     ],
   },
   {

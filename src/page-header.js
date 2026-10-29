@@ -5,7 +5,7 @@ import { categories, profile } from './data.js';
 export function renderPageHeader() {
   const count = categories.reduce((total, category) => total + category.projects.length, 0);
   return `<header class="header">
-    <a class="wordmark" href="/#top" aria-label="${profile.nameKo} — 처음으로">jh<span class="wordmark-dot">.</span></a>
+    <a class="wordmark" href="/#top" aria-label="${profile.nameKo} — 처음으로">sy<span class="wordmark-dot">.</span></a>
     <a class="header-role" href="/#top">${profile.name}<span>${profile.role}</span></a>
     <nav aria-label="메인 내비게이션">
       <a class="nav-link is-current" href="/#work">Work <span class="nav-count">${String(count).padStart(2, '0')}</span></a>

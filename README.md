@@ -2,7 +2,7 @@
 
 Vite 기반 HTML/CSS/JavaScript UI/UX 디자이너 포트폴리오 프로토타입입니다.
 페이지는 HERO → PROJECT → ABOUT → CONTACT 순서로 구성됩니다.
-REDESIGN 목록과 가족센터·TANGLE·MONAMI의 임시 상세 안내 화면을 포함합니다. 실제 Case Study는 추후 제작합니다.
+REDESIGN 목록, 가족센터의 원본 이미지 상세페이지, TANGLE·MONAMI의 임시 상세 안내 화면을 포함합니다.
 
 ## 시작하기
 
@@ -32,22 +32,33 @@ Vite 서버 없이 HTML 파일을 여는 뷰어에서는 소스 `index.html`을 
 npm run build:preview
 ```
 
-생성된 파일은 별도 서버나 외부 자산 요청 없이 사용할 수 있습니다. REDESIGN 목록과 세 임시 상세 경로도 파일 안에 포함하며, 목록·상세·메인 복귀를 오프라인으로 탐색할 수 있습니다. 실제 사이트에서는 정상적인 페이지 URL과 브라우저 이력을 사용하고, 서버 없는 뷰어에서만 격리된 내장 화면으로 연결합니다. 콘텐츠를 수정한 뒤에는 다시 생성하세요.
+생성된 파일은 별도 서버나 외부 자산 요청 없이 사용할 수 있습니다. REDESIGN 목록과 세 임시 상세 경로도 파일 안에 포함하며, 목록·상세·메인 복귀를 오프라인으로 탐색할 수 있습니다. 실제 사이트에서는 정상적인 페이지 URL과 브라우저 이력을 사용하고, 서버 없는 뷰어에서만 격리된 내장 화면으로 연결합니다. 원본 이미지는 압축·리사이즈하지 않고 포함하며, 큰 이미지 데이터는 가족센터 상세 문서를 열 때만 연결해 다른 오프라인 경로를 가볍게 유지합니다. 콘텐츠를 수정한 뒤에는 다시 생성하세요.
 `preview.html`은 생성물로 Git에서 제외되며, 일반 개발은 기존 `npm run dev`를 사용합니다.
+
+큰 단일 HTML이 열리지 않는 뷰어에서는 다음 명령으로 다운로드용 미리보기를 생성할 수 있습니다.
+
+```sh
+node scripts/build-preview.mjs --download
+```
+
+결과는 `.vite/download-preview/`입니다. 폴더 전체를 복사하거나 압축을 푼 뒤 `index.html`을 브라우저로 여세요. 각 HTML에는 스크립트·스타일·폰트가 포함되어 설치나 서버 없이 탐색할 수 있습니다. 가족센터 PNG는 별도 `assets/` 파일로 원본 그대로 유지하므로 HTML만 따로 옮기지 마세요. 실제 사이트의 코드와 경로는 변경하지 않습니다.
 
 ## 기본 구조
 
 ```text
 index.html               메인 HTML 진입점 및 메타 정보
 redesign/index.html      REDESIGN 목록 진입점
-redesign/family-center/index.html  가족센터 임시 상세 진입점
+redesign/family-center/index.html  가족센터 원본 이미지 상세 진입점
 redesign/tangle/index.html  TANGLE 임시 상세 진입점
 redesign/monami/index.html  MONAMI 임시 상세 진입점
 vite.config.js           다섯 개 HTML의 프로덕션 빌드 입력
 src/main.js              화면 렌더링 및 인터랙션
 src/data.js              프로필, 메인 카테고리 및 쇼릴 데이터
 src/work-data.js         REDESIGN 목록 문구 및 프로젝트 배열
-src/redesign.js          목록·임시 상세 화면 렌더링
+src/redesign.js          목록·상세 화면 선택 및 렌더링
+src/family-center-detail.js  가족센터 원본 이미지 갤러리와 하단 내비게이션
+src/family-center-detail.css  원본 비율·최대 너비·모바일 스타일
+src/assets/family-center/    업로드된 표지·전체 포트폴리오 PNG 원본
 src/redesign.css         새 페이지 전용 스타일
 src/page-header.js       보조 페이지의 공통 Header
 src/hover-cursor.js      썸네일용 VIEW MORE 커서
@@ -113,10 +124,11 @@ PROJECT와 VIBE CODING은 `null`을 유지하며 준비 중 다이얼로그를 �
 ### REDESIGN 목록과 경로
 
 - `/redesign/`: 01 가족센터 / 02 TANGLE / 03 MONAMI 순서로 큰 썸네일을 세로 배치합니다.
-- `/redesign/family-center`, `/redesign/tangle/`, `/redesign/monami/`: 실제 Case Study 대신 준비 중 안내를 표시합니다. 디렉터리 URL의 마지막 `/`는 개발·빌드 미리보기 서버에서 자동 보완합니다.
+- `/redesign/family-center`: 목록의 표지를 클릭하면 전체 포트폴리오(1920×9154) 한 장을 자르거나 분해하지 않고 그대로 표시합니다. 별도 표지는 상세페이지에 중복 배치하지 않으며 `width: 100%; height: auto`, 최대 너비 1280px을 사용합니다. 하단 BACK TO WORK는 메인 SELECTED WORK, NEXT PROJECT는 TANGLE로 연결됩니다.
+- `/redesign/tangle/`, `/redesign/monami/`: 준비 중 안내를 유지합니다. 디렉터리 URL의 마지막 `/`는 개발·빌드 미리보기 서버에서 자동 보완합니다.
 - 썸네일과 제목은 실제 상세 경로로 연결됩니다. Header의 Work와 BACK TO WORK는 `/#work`로 돌아갑니다. About·Contact·Logo도 메인의 해당 위치에 연결됩니다.
 - 썸네일은 Desktop hover 시 기존 128px 원형 스타일과 0.18 추종 계수의 VIEW MORE 커서를 사용하며, 이미지만 1.025배 확대됩니다. Desktop의 일반 영역과 텍스트 링크는 화살표를 유지합니다. 스크롤 중에는 마우스 아래의 실제 요소를 다시 판정해 썸네일 위에서는 커스텀 커서를 유지하고, 벗어나면 화살표로 복귀합니다. 터치/760px 이하에서는 기본 탭으로 동작합니다. 페이지 진입은 12px / 0.55초 fade-up이며 Reduced Motion에서는 생략합니다.
-- 목록 문구와 프로젝트는 `src/work-data.js`에서 관리합니다. 각 프로젝트에 `number`, `title`, `category`, `year`, `description`, `thumbnail`, `link`가 있습니다. 메인과 공유하는 제목·이미지·연도는 기존 프로젝트 데이터를 참조합니다. 가족센터 레코드는 `year: '—'`, 임시 `description`, `thumbnail: '/images/family-center.svg'`를 직접 수정하면 됩니다. 메인 쇼릴은 이번 변경에 포함하지 않으며 FORMA도 그대로 유지됩니다.
+- 목록 문구와 프로젝트는 `src/work-data.js`에서 관리합니다. 각 프로젝트에 `number`, `title`, `category`, `year`, `description`, `thumbnail`, `link`가 있습니다. 메인과 공유하는 제목·이미지·연도는 기존 프로젝트 데이터를 참조합니다. 가족센터 레코드는 `year: '—'`, 임시 `description`, `thumbnail: '/images/family-center-cover.png'`를 직접 수정하면 됩니다. 목록의 가족센터 썸네일은 업로드된 실제 표지를 원본 그대로 사용하며, `thumbnailFit: 'contain'`으로 기존 틀 안에 전체가 보이도록 합니다. 메인 쇼릴은 이번 변경에 포함하지 않으며 FORMA도 그대로 유지됩니다.
 - 목록에 작업을 추가할 때는 배열에 새 레코드를 추가하세요. 새 상세 경로도 만들 경우 기존 상세 HTML을 복사해 해당 디렉터리에 두고 `vite.config.js`의 빌드 입력에 추가하면 같은 상세 렌더러를 사용합니다.
 - 별도 프레임워크 없이 Vite 다중 HTML로 빌드하므로 위 경로는 직접 열기·새로고침이 가능합니다. 정적 호스팅은 각 디렉터리의 `index.html`을 제공하도록 설정합니다.
 
@@ -136,4 +148,4 @@ npm run test:e2e
 다른 실행 파일은 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`로 지정할 수 있습니다.
 테스트 서버는 자동으로 실행되며 개발 서버가 이미 있다면 재사용합니다.
 
-커스텀 커서, HERO 이동, Sticky 유지·해제 및 역방향 스크롤, 카테고리별 자동 순환·반복, 일시정지·재개, 움직임 줄이기 설정, 키보드 다이얼로그, 이미지·폰트 로딩, Desktop 크기별 레이아웃과 터치 레이아웃을 확인합니다. 카테고리별 충분한 스크롤 체류 시간과 페이드 도중 카테고리 변경 시 이미지·타이머 초기화도 검증합니다. ABOUT의 읽기 강조와 Sticky, CONTACT의 커서와 placeholder, Header 연결, 반응형도 포함합니다. HERO와 CONTACT의 순차 reveal, 빠른 스크롤 시 가시성, 실행 중 Reduced Motion 전환을 실제 브라우저 애니메이션으로 검사합니다. 궤도 포인트의 실제 경로 추종·반복·선 그리기·정지 동작과 CTA 클릭도 검증합니다. 서버 없는 단일 HTML에서도 배경 경로 모션을 포함해 오프라인 격리 iframe에서 검증합니다. 카테고리 3D 전환의 회전·불투명도·재생 대기·연속 스크롤 취소와 ABOUT의 세 항목 지속 표시·상단 읽기 기준선·강조 유지·네 줄 고정·모바일 및 Reduced Motion 전환도 확인합니다. REDESIGN의 키보드 진입·큰 썸네일 목록·커서·상세 경로 직접 열기·새로고침·브라우저 이력·메인 복귀·모바일 탭과 오프라인 페이지 탐색도 확인합니다. 커서를 움직이지 않은 채 스크롤하여 썸네일에 진입·체류·이탈·다음 썸네일 진입을 검증하고, 브라우저 pointer가 프레임 중 노출되지 않는지도 확인합니다. 가족센터의 URL 보완·직접 진입·새로고침도 검증합니다. 테스트는 총 42개이며 실행 전에 단일 HTML을 자동 생성합니다.
+커스텀 커서, HERO 이동, Sticky 유지·해제 및 역방향 스크롤, 카테고리별 자동 순환·반복, 일시정지·재개, 움직임 줄이기 설정, 키보드 다이얼로그, 이미지·폰트 로딩, Desktop 크기별 레이아웃과 터치 레이아웃을 확인합니다. 카테고리별 충분한 스크롤 체류 시간과 페이드 도중 카테고리 변경 시 이미지·타이머 초기화도 검증합니다. ABOUT의 읽기 강조와 Sticky, CONTACT의 커서와 placeholder, Header 연결, 반응형도 포함합니다. HERO와 CONTACT의 순차 reveal, 빠른 스크롤 시 가시성, 실행 중 Reduced Motion 전환을 실제 브라우저 애니메이션으로 검사합니다. 궤도 포인트의 실제 경로 추종·반복·선 그리기·정지 동작과 CTA 클릭도 검증합니다. 서버 없는 단일 HTML에서도 배경 경로 모션을 포함해 오프라인 격리 iframe에서 검증합니다. 카테고리 3D 전환의 회전·불투명도·재생 대기·연속 스크롤 취소와 ABOUT의 세 항목 지속 표시·상단 읽기 기준선·강조 유지·네 줄 고정·모바일 및 Reduced Motion 전환도 확인합니다. REDESIGN의 키보드 진입·큰 썸네일 목록·커서·상세 경로 직접 열기·새로고침·브라우저 이력·메인 복귀·모바일 탭과 오프라인 페이지 탐색도 확인합니다. 커서를 움직이지 않은 채 스크롤하여 썸네일에 진입·체류·이탈·다음 썸네일 진입을 검증하고, 브라우저 pointer가 프레임 중 노출되지 않는지도 확인합니다. 가족센터의 URL 보완·직접 진입·새로고침도 검증합니다. 가족센터 원본 파일과 제공되는 이미지의 SHA-256 일치, 320~2560px에서의 원본 비율·이미지 간격·최대 너비, 하단 내비게이션도 검증합니다. 테스트는 총 45개이며 실행 전에 단일 HTML을 자동 생성합니다.

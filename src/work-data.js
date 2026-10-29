@@ -30,8 +30,9 @@ export const redesign = {
       category: 'Web Redesign',
       year: '—', // Replace when the project year is supplied.
       description: '프로젝트 소개는 곧 업데이트됩니다.',
-      thumbnail: '/images/family-center.svg', // Replace with the actual thumbnail.
-      alt: '가족센터 웹 리디자인 프로젝트의 임시 대표 이미지',
+      thumbnail: '/images/family-center-cover.png',
+      thumbnailFit: 'contain',
+      alt: '청주시 가족센터 웹 리디자인 포트폴리오 표지',
       link: '/redesign/family-center',
     },
     listingProject('tangle', '02', '브랜드의 개성을 화면에 담고,\n탐색의 흐름을 새롭게 정리한 웹 리디자인.'),

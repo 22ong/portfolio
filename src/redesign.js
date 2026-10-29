@@ -7,6 +7,7 @@ import { profile } from './data.js';
 import { redesign } from './work-data.js';
 import { renderPageHeader } from './page-header.js';
 import { initHoverCursor } from './hover-cursor.js';
+import { hasFamilyCenterArtwork, renderFamilyCenterDetail } from './family-center-detail.js';
 
 const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const slug = (globalThis.__PORTFOLIO_PREVIEW_PATH__ ?? location.pathname).split('/').filter(Boolean)[1];
@@ -16,7 +17,7 @@ const footer = `<footer class="work-page-footer"><span>© 2026 ${escapeHTML(prof
 function projectEntry(item) {
   return `<article class="work-entry" aria-labelledby="${item.id}-heading">
     <a class="work-thumbnail" href="${escapeHTML(item.link)}" aria-label="${escapeHTML(item.title)} 프로젝트 자세히 보기" draggable="false" data-work-cursor>
-      <img src="${escapeHTML(item.thumbnail)}" alt="${escapeHTML(item.alt)}" width="1200" height="1000" draggable="false" loading="${item.number === '01' ? 'eager' : 'lazy'}" />
+      <img${item.thumbnailFit === 'contain' ? ' class="is-cover-thumbnail"' : ''} src="${escapeHTML(item.thumbnail)}" alt="${escapeHTML(item.alt)}" width="1200" height="1000" draggable="false" loading="${item.number === '01' ? 'eager' : 'lazy'}" />
       <span class="work-thumbnail-hint" aria-hidden="true">VIEW PROJECT <span>↗</span></span>
     </a>
     <div class="work-entry-meta"><span class="work-entry-number">${escapeHTML(item.number)}</span>
@@ -54,5 +55,9 @@ function renderPlaceholder(item) {
 
 document.title = `${project?.title ?? redesign.title} — ${profile.name}`;
 document.body.classList.toggle('redesign-list-page', !project);
-document.querySelector('#app').innerHTML = `<a class="skip-link" href="#page-content">본문으로 건너뛰기</a>${renderPageHeader()}${project ? renderPlaceholder(project) : renderList()}`;
+const nextProject = project && redesign.projects[redesign.projects.indexOf(project) + 1];
+const content = project?.id === 'family-center' && hasFamilyCenterArtwork
+  ? renderFamilyCenterDetail(project, nextProject)
+  : project ? renderPlaceholder(project) : renderList();
+document.querySelector('#app').innerHTML = `<a class="skip-link" href="#page-content">본문으로 건너뛰기</a>${renderPageHeader()}${content}`;
 if (!project) initHoverCursor([...document.querySelectorAll('[data-work-cursor]')], document.querySelector('.work-list-cursor'));

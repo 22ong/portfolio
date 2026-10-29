@@ -55,6 +55,8 @@ test('standalone preview renders and runs interactions in an isolated offline if
 });
 
 test('standalone preview navigates through Redesign and all three details entirely offline, then restores Work', async ({ page, context }) => {
+  // This journey decodes the full-resolution 7.6 MB artwork in an opaque iframe.
+  test.setTimeout(90000);
   const html = await readFile(new URL('../preview.html', import.meta.url), 'utf8');
   const errors = [], requests = [];
   page.on('pageerror', (error) => errors.push(error.message));
@@ -71,6 +73,11 @@ test('standalone preview navigates through Redesign and all three details entire
   for (const [index, title] of [[0, '가족센터.'], [1, 'TANGLE.'], [2, 'MONAMI.']]) {
     await route.locator('.work-thumbnail').nth(index).click();
     await expect(route.locator('h1')).toHaveText(title);
+    if (index === 0) {
+      await expect.poll(() => route.locator('.family-center-image').evaluateAll((images) => images.length === 1 && images.every((image) => image.complete && image.naturalWidth === 1920))).toBe(true);
+      await route.locator('.family-center-next').click();
+      await expect(route.locator('h1')).toHaveText('TANGLE.');
+    }
     await route.locator('.work-detail-placeholder > .work-back-link').click();
     await expect(route.locator('h1')).toHaveText('REDESIGN.');
   }

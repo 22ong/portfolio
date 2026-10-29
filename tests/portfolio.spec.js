@@ -44,7 +44,7 @@ test('scroll pins work through all categories, reverses, then releases after VIB
 test('every category automatically cycles only its own images and loops', async ({ page }) => {
   await page.clock.install();
   await page.goto('/');
-  for (const [progress, ids] of [[0.05, ['tangle', 'monami', 'forma']], [0.4, ['orbit', 'common']], [0.75, ['motion', 'field']]]) {
+  for (const [progress, ids] of [[0.05, ['family-center', 'tangle', 'monami']], [0.4, ['orbit', 'common']], [0.75, ['motion', 'field']]]) {
     await scrollWork(page, progress);
     await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', ids[0]);
     await expect(page.locator('.visual-stage')).not.toHaveClass(/is-category-transitioning/);
@@ -85,9 +85,9 @@ test('category changes cancel outgoing fades and restart a full autoplay interva
   await scrollWithPausedClock(0.05);
   // Switch categories while the first category's automatic fade is in flight.
   await page.clock.runFor(3650);
-  await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', 'monami');
+  await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', 'tangle');
 
-  for (const [progress, first, second] of [[0.4, 'orbit', 'common'], [0.75, 'motion', 'field'], [0.05, 'tangle', 'monami']]) {
+  for (const [progress, first, second] of [[0.4, 'orbit', 'common'], [0.75, 'motion', 'field'], [0.05, 'family-center', 'tangle']]) {
     await scrollWithPausedClock(progress);
     await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', first);
     // The automatic slide layers reset immediately. A separate snapshot panel
@@ -110,14 +110,14 @@ test('autoplay can pause and resume, and respects reduced motion', async ({ page
   await scrollWork(page, 0.05);
   await page.getByRole('button', { name: '대표 이미지 자동 전환 일시정지' }).click();
   await page.clock.fastForward(8000);
-  await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', 'tangle');
+  await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', 'family-center');
   await page.getByRole('button', { name: '대표 이미지 자동 전환 재생' }).click();
   await page.clock.fastForward(3700);
-  await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', 'monami');
+  await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', 'tangle');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(page.locator('.motion-toggle')).toBeDisabled();
   await page.clock.fastForward(8000);
-  await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', 'monami');
+  await expect(page.locator('.project-image.is-visible')).toHaveAttribute('data-project', 'tangle');
   await scrollWork(page, 0.75);
   await expect(page.locator('.category-row.is-active')).toHaveAttribute('data-category', 'vibe-coding');
 });

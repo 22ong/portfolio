@@ -1,0 +1,13 @@
+/* Display the original two images; these rules apply only to this detail page. */
+.work-page.family-center-detail { width: 100%; max-width: 1480px; margin: 0 auto; padding: 124px clamp(20px, 5.2vw, 76px) 30px; animation: none; }
+.family-center-images { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0; line-height: 0; }
+.family-center-image { display: block; width: 100%; height: auto; max-width: 100%; margin: 0; padding: 0; border: 0; box-shadow: none; }
+.family-center-navigation { width: 100%; max-width: 1280px; margin: 48px auto 0; padding-top: 25px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+.family-center-next { flex-direction: column; align-items: flex-end; gap: 9px; }
+.family-center-next > span { font-size: inherit; }
+.family-center-next > span:last-child { color: #7b826f; }
+.family-center-next:hover > span { transform: none; }
+@media (max-width: 760px) {
+  .work-page.family-center-detail { padding: 100px 5% 23px; }
+  .family-center-navigation { margin-top: 32px; padding-top: 20px; gap: 18px; }
+}

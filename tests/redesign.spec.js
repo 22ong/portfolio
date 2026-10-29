@@ -25,6 +25,8 @@ test('Redesign lists three large projects with data-driven metadata and real det
   await expect(page.locator('.work-entry-number')).toHaveText(['01', '02', '03']);
   await expect(page.locator('.work-entry-facts')).toContainText(['—', '2026', '2026']);
   await expect(page.locator('.work-thumbnail').nth(0)).toHaveAttribute('href', '/redesign/family-center');
+  await expect(page.locator('.work-thumbnail img').first()).toHaveAttribute('src', '/images/family-center-cover.png');
+  await expect(page.locator('.work-thumbnail img').first()).toHaveCSS('object-fit', 'contain');
   await expect(page.locator('.work-thumbnail').nth(1)).toHaveAttribute('href', '/redesign/tangle/')
   await expect(page.locator('.work-thumbnail').nth(2)).toHaveAttribute('href', '/redesign/monami/');
   const a = await page.locator('.work-thumbnail').nth(0).boundingBox();
@@ -61,13 +63,15 @@ test('thumbnail cursor reuses the home style, follows smoothly, and restores the
 
 test('all project routes load directly, reload, and return through list, history and header navigation', async ({ page }) => {
   for (const [slug, title] of [['family-center', '가족센터'], ['tangle', 'TANGLE'], ['monami', 'MONAMI']]) {
+    await page.goto('/redesign/');
     await page.goto(`/redesign/${slug}/`);
     await page.reload();
     await expect(page.locator('h1')).toHaveText(`${title}.`);
-    await expect(page.locator('.detail-preparing')).toContainText('이 프로젝트의 이야기를 준비하고 있습니다.');
-    await page.locator('.work-detail-placeholder > .work-back-link').click();
-    await expect(page.locator('h1')).toHaveText('REDESIGN.');
+    if (slug === 'family-center') await expect(page.locator('.family-center-image')).toHaveCount(1);
+    else await expect(page.locator('.detail-preparing')).toContainText('이 프로젝트의 이야기를 준비하고 있습니다.');
     await page.goBack();
+    await expect(page.locator('h1')).toHaveText('REDESIGN.');
+    await page.goForward();
     await expect(page.locator('h1')).toHaveText(`${title}.`);
     await page.locator('.header .nav-link').first().click();
     await expect(page).toHaveURL(/\/#work$/);
@@ -162,5 +166,7 @@ test('family center uses its exact data URL and redirects to a reloadable detail
   await expect(page.locator('h1')).toHaveText('가족센터.');
   await page.reload();
   await expect(page.locator('h1')).toHaveText('가족센터.');
-  await expect(page.locator('.detail-placeholder-image')).toHaveAttribute('src', '/images/family-center.svg');
+  await expect(page.locator('.family-center-image')).toHaveCount(1);
+  await expect(page.locator('.family-center-cover')).toHaveCount(0);
+  await expect(page.locator('.family-center-portfolio')).toHaveAttribute('src', /portfolio\.png/);
 });

@@ -13,7 +13,7 @@ const allProjects = categories.flatMap((category) => category.projects);
 document.querySelector('#app').innerHTML = `
   <a class="skip-link" href="#work">프로젝트 탐색으로 건너뛰기</a>
   <header class="header">
-    <a class="wordmark" href="#top" aria-label="${profile.nameKo} — 처음으로">jh<span class="wordmark-dot">.</span></a>
+    <a class="wordmark" href="#top" aria-label="${profile.nameKo} — 처음으로">sy<span class="wordmark-dot">.</span></a>
     <a class="header-role" href="#top">${profile.name}<span>${profile.role}</span></a>
     <nav aria-label="메인 내비게이션">
       <a class="nav-link is-current" href="#work">Work <span class="nav-count">${String(allProjects.length).padStart(2, '0')}</span></a>
@@ -31,7 +31,7 @@ document.querySelector('#app').innerHTML = `
         </div>
         <div class="hero-intro">
           <p><span class="hero-lead">정보는 쉽게, 브랜드의 매력은 선명하게 전달합니다.</span><span class="hero-support">사용자와 브랜드 사이, 더 나은 경험을 디자인합니다.</span></p>
-          <span class="intro-label">Clarity in thought.<br><em>Character in design.</em></span>
+          <span class="intro-label" aria-hidden="true"></span>
           <span class="touch-cta">프로젝트 보기 <span aria-hidden="true">↗</span></span>
         </div>
       </a>
@@ -64,8 +64,8 @@ document.querySelector('#app').innerHTML = `
             <div class="visual-topline"><span><span class="live-dot" aria-hidden="true"></span> A GLIMPSE OF THE WORK</span><button class="motion-toggle" type="button" aria-label="대표 이미지 자동 전환 일시정지" aria-pressed="false"><span class="pause-icon" aria-hidden="true">Ⅱ</span><span class="motion-label">PAUSE</span></button></div>
             <div class="visual-stage" role="group" aria-roledescription="자동 순환 프로젝트 비주얼" aria-label="카테고리별 프로젝트 미리보기">
               <div class="visual-card">
-              ${allProjects.map((project, index) => `<img class="project-image${index === 0 ? ' is-visible' : ''}" data-project="${project.id}" src="${project.image}" alt="${project.alt}" width="1200" height="1000" ${index > 0 ? 'aria-hidden="true"' : ''} draggable="false">`).join('')}
-              <span class="visual-badge">CONCEPT / ${categories[0].projects[0].year}</span>
+              ${allProjects.map((project, index) => `<img class="project-image${index === 0 ? ' is-visible' : ''}" data-project="${project.id}"${project.imageFit ? ` data-image-fit="${project.imageFit}"` : ''} src="${project.image}" alt="${project.alt}" width="1200" height="1000" ${index > 0 ? 'aria-hidden="true"' : ''} draggable="false">`).join('')}
+              <span class="visual-badge">${categories[0].projects[0].badge ?? `CONCEPT / ${categories[0].projects[0].year}`}</span>
               </div>
             </div>
             <div class="project-meta">
@@ -174,7 +174,7 @@ function showProject({ reset = false } = {}) {
   document.querySelector('.project-title').textContent = project.title;
   document.querySelector('.project-subtitle').textContent = project.subtitle;
   document.querySelector('.project-type').textContent = project.category;
-  document.querySelector('.visual-badge').textContent = `CONCEPT / ${project.year}`;
+  document.querySelector('.visual-badge').textContent = project.badge ?? `CONCEPT / ${project.year}`;
   indicators.innerHTML = category.projects.map((_, index) => `<span class="slide-indicator${index === activeProject ? ' is-active' : ''}" aria-hidden="true"></span>`).join('');
   indicators.setAttribute('aria-label', `현재 이미지 ${activeProject + 1} / ${category.projects.length}`);
 }

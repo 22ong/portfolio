@@ -75,7 +75,7 @@ test('rapid category changes cancel stale panels and reduced motion settles imme
   await expect(page.locator('.category-row.is-active')).toHaveAttribute('data-category', 'redesign');
   await expect(page.locator('.visual-stage')).not.toHaveClass(/is-category-transitioning/);
   await expect(page.locator('.category-card-ghost')).toHaveCount(0);
-  await expect(page.locator('.project-image[aria-hidden="false"]')).toHaveAttribute('data-project', 'tangle');
+  await expect(page.locator('.project-image[aria-hidden="false"]')).toHaveAttribute('data-project', 'family-center');
   await scrollWork(page, .4);
   await expect(page.locator('.visual-stage')).toHaveClass(/is-category-transitioning/);
   await page.emulateMedia({ reducedMotion: 'reduce' });
